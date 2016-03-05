@@ -1,0 +1,22 @@
+.DS_Store
+*~
+*.a
+*.dll
+*.dSYM
+*.dylib
+*.o
+*.so
+
+### Vim stuff ###
+# swap
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+Session.vim
+.netrwhist
+
+### CMake stuff ###
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+cmake_install.cmake
+install_manifest.txt

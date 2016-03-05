@@ -1,0 +1,28 @@
+[user]
+    name = Grisha
+    email = gkuznets@ya.ru
+
+[core]
+    editor = vim
+    excludesfile = ~/.config/rc/gitignore_global
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+
+[merge]
+    tool = vimdiff
+
+[alias]
+    br = branch
+    ci = commit
+    cia = commit --amend
+    co = checkout
+    cp = cherry-pick
+    dc = diff --cached
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    rh = reset --hard
+    ri = rebase -i
+    st = status
+
