@@ -21,8 +21,8 @@
     co = checkout
     cp = cherry-pick
     dc = diff --cached
-    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    hist = !git --no-pager log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     rh = reset --hard
     ri = rebase -i
     st = status
-
+    wip = commit -am"wip"

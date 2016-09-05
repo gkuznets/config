@@ -1,5 +1,6 @@
 case `uname` in
     ("Darwin") local PLATFORM="macosx" ;;
+    ("Linux") local PLATFORM="linux" ;;
     (*) local PLATFORM="unknown" ;;
 esac
 
@@ -51,9 +52,13 @@ collapse_path() {
     $RC_ROOT/collapse-path.py $(pwd | sed -e "s,^$HOME,~,") 25
 }
 
-# %* -- Current  time  of  day in 24-hour format, with seconds.
+if [ $PLATFORM = "linux" ]; then
+    host_part="%2m:\\"
+fi
+# %* -- Current time of day in 24-hour format, with seconds.
 PROMPT='${return_code}\
 %{$FG[008]%}%*%{$reset_color%} \
+$host_part
 $(collapse_path) \
 $(git_prompt_info)\
 %{$fg[$USER_COLOR]%}» %{$reset_color%}'
@@ -66,8 +71,13 @@ ZSH_THEME_GIT_PROMPT_DIRTY="⚡"
 # Variables
 export EDITOR=vim
 export EMAIL="gkuznets@ya.ru"
+export GOPATH=$HOME/.go
 export HOMEBREW_NO_ANALYTICS=1
-export PATH=$HOME/bin:$HOME/.cargo/bin:$PATH
+export LC_ALL="en_US.UTF-8"
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH:$GOPATH/bin
+if [ $PLATFORM = "linux" ]; then
+    exportPATH=:$HOME/.linuxbrew/bin:$PATH:$HOME/.linuxbrew/opt/go/libexec/bin
+fi
 
 # Aliases
 alias -- ++="$(cpp_compiler)"
