@@ -79,7 +79,9 @@ export HOMEBREW_NO_ANALYTICS=1
 export LC_ALL="en_US.UTF-8"
 export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH:$GOPATH/bin
 if [ $PLATFORM = "linux" ]; then
-    exportPATH=:$HOME/.linuxbrew/bin:$PATH:$HOME/.linuxbrew/opt/go/libexec/bin
+    export MANPATH=$HOME/.linuxbrew/share/man:$MANPATH
+    export INFOPATH=$HOME/.linuxbrew/share/info:$INFOPATH
+    export PATH=$HOME/.linuxbrew/bin:$HOME/.linuxbrew/opt/go/libexec/bin:$PATH
 fi
 
 # Aliases
