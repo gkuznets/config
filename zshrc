@@ -66,6 +66,8 @@ ZSH_THEME_GIT_PROMPT_DIRTY="⚡"
 # Variables
 export EDITOR=vim
 export EMAIL="gkuznets@ya.ru"
+export HOMEBREW_NO_ANALYTICS=1
+export PATH=$HOME/bin:$HOME/.cargo/bin:$PATH
 
 # Aliases
 alias -- ++="$(cpp_compiler)"
@@ -87,3 +89,6 @@ else
     alias p="python3"
 fi
 alias v="vim"
+
+# OPAM configuration
+. $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

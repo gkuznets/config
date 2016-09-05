@@ -7,6 +7,8 @@ let &rtp .= "," . s:VIM_ROOT
 " Vundle config
 let &rtp .= "," . s:VIM_ROOT . "/bundle/vundle"
 call vundle#begin()
+Plugin 'Addisonbean/Vim-Xcode-Theme'
+Plugin 'Chiel92/vim-autoformat'
 Plugin 'Keithbsmiley/swift.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimshell.vim'
@@ -15,16 +17,18 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'dcharbon/vim-flatbuffers'
 Plugin 'derekelkins/agda-vim'
 Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'gilligan/vim-lldb'
-Plugin 'git://git.wincent.com/command-t.git'
+"Plugin 'gilligan/vim-lldb'
+"Plugin 'wincent/command-t'
 Plugin 'gmarik/Vundle.vim'
+"Plugin 'jeaye/color_coded'
 Plugin 'kana/vim-wwwsearch'
 Plugin 'kien/ctrlp.vim'
+Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'leafgarland/typescript-vim.git'
 Plugin 'mhinz/vim-startify'
 Plugin 'mileszs/ack.vim.git'
 Plugin 'morhetz/gruvbox'
-Plugin 'phildawes/racer'
+Plugin 'racer-rust/vim-racer'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'rking/ag.vim'
 Plugin 'rust-lang/rust.vim'
@@ -75,9 +79,40 @@ let g:startify_custom_header = s:vim_banner +
 
 
 "racer configuration
-"set hidden
-"let g:racer_cmd = "/usr/local/src/racer/target/release/racer"
-"let $RUST_SRC_PATH="/usr/local/src/rust/src/"
+set hidden
+let g:racer_cmd = "/Users/gk/.cargo/bin/racer"
+let $RUST_SRC_PATH="/usr/local/src/rust/src/"
+
+" autoformat
+let g:formatdef_rustfmt = '"rustfmt"'
+let g:formatters_rust = ['rustfmt']
+
+" rainbow_parentheses
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+"let g:rbpt_loadcmd_toggle = 0
+ " Always on
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound  " ()
+au Syntax * RainbowParenthesesLoadSquare " []
+au Syntax * RainbowParenthesesLoadBraces " {}
 
 set encoding=utf-8
 set wildignore+=*/*.xcodeproj/*,*.o,*.so,*.pyc,*.swp,*.zip,*.gz
