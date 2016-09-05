@@ -72,7 +72,7 @@ ZSH_THEME_GIT_PROMPT_DIRTY="⚡"
 export EDITOR=vim
 export EMAIL="gkuznets@ya.ru"
 if [ -f $HOME/.config/email ]; then
-    export EMAIL=`cat $HOME/.config/email
+    export EMAIL=`cat $HOME/.config/email`
 fi
 export GOPATH=$HOME/.go
 export HOMEBREW_NO_ANALYTICS=1
