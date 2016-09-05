@@ -53,12 +53,12 @@ collapse_path() {
 }
 
 if [ $PLATFORM = "linux" ]; then
-    host_part="%2m:\\"
+    host_part="%2m:"
 fi
 # %* -- Current time of day in 24-hour format, with seconds.
 PROMPT='${return_code}\
 %{$FG[008]%}%*%{$reset_color%} \
-$host_part
+$host_part\
 $(collapse_path) \
 $(git_prompt_info)\
 %{$fg[$USER_COLOR]%}» %{$reset_color%}'
@@ -71,6 +71,9 @@ ZSH_THEME_GIT_PROMPT_DIRTY="⚡"
 # Variables
 export EDITOR=vim
 export EMAIL="gkuznets@ya.ru"
+if [ -f $HOME/.config/email ]; then
+    export EMAIL=`cat $HOME/.config/email
+fi
 export GOPATH=$HOME/.go
 export HOMEBREW_NO_ANALYTICS=1
 export LC_ALL="en_US.UTF-8"
