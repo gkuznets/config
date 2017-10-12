@@ -8,8 +8,8 @@ local RC_ROOT=$HOME/.config/rc
 
 cpp_compiler() {
     case $PLATFORM in
-        ("macosx") print "clang++ --std=c++14" ;;
-        ("linux") print "g++ --std=c++14" ;;
+        ("macosx") print "clang++ --std=c++1z -Wall -march=native" ;;
+        ("linux") print "g++ --std=c++1z -Wall -march=native" ;;
         (*) print "c++" ;;
     esac
 }
@@ -25,7 +25,7 @@ system_concurrency() {
         ("macosx") print `sysctl -n hw.ncpu` ;;
         ("linux") print `nproc` ;;
         (*) print 4 ;;
-    esac 
+    esac
 }
 
 # Antigen
@@ -45,6 +45,26 @@ antigen apply
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+# Vi mode
+bindkey -v
+## backspace and ^h working even after returning from command mode
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+## ctrl-w removes word backwards
+bindkey '^w' backward-kill-word
+
+function zle-line-init zle-keymap-select {
+    if [ $KEYMAP = "main" ]; then
+        PROMPT_SYMBOL="»"
+    else
+        PROMPT_SYMBOL="#"
+    fi
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
 # Theme
 if [ $UID -eq 0 ]; then USER_COLOR="red"; else USER_COLOR="white"; fi
 local return_code="%(?..%{$fg[red]%}%? %{$reset_color%})"
@@ -61,7 +81,7 @@ PROMPT='${return_code}\
 $host_part\
 $(collapse_path) \
 $(git_prompt_info)\
-%{$fg[$USER_COLOR]%}» %{$reset_color%}'
+%{$fg[$USER_COLOR]%}$PROMPT_SYMBOL %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}±%{$fg[yellow]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
@@ -77,17 +97,20 @@ fi
 export GOPATH=$HOME/.go
 export HOMEBREW_NO_ANALYTICS=1
 export LC_ALL="en_US.UTF-8"
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH:$GOPATH/bin
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH:$GOPATH/bin:/usr/local/opt/llvm/bin
 if [ $PLATFORM = "linux" ]; then
     export MANPATH=$HOME/.linuxbrew/share/man:$MANPATH
     export INFOPATH=$HOME/.linuxbrew/share/info:$INFOPATH
     export PATH=$HOME/.linuxbrew/bin:$HOME/.linuxbrew/opt/go/libexec/bin:$PATH
 fi
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include:$HOME/include
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 # Aliases
 alias -- ++="$(cpp_compiler)"
 alias -g ...="../.."
 alias c="clear"
+(xexists "cargo") && alias cg="cargo"
 (xexists "brew") && alias b="brew"
 alias e="vim"
 alias :e="vim"
@@ -96,6 +119,7 @@ alias g="git"
 alias gti="git"
 alias m="clear && make -j $(system_concurrency)"
 alias md="mkdir"
+alias o="open"
 if xexists "ptpython"; then
     alias p="ptpython"
 elif xexists "ipython3"; then
@@ -104,6 +128,13 @@ else
     alias p="python3"
 fi
 alias v="vim"
+
+if xexists "gls"; then
+    alias ls="gls --color=always -F"
+fi
+if xexists "grm"; then
+    alias rm="grm"
+fi
 
 # OPAM configuration
 . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

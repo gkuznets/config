@@ -2,8 +2,10 @@ iab cnost const
 iab cosnt const
 iab cpnct const
 iab csont const
+iab csont const
 iab doubel double
 iab egde edge
+iab flase false
 iab garph graph
 iab heigth height
 iab incldue include
@@ -17,12 +19,14 @@ iab ptivate private
 iab rerutn return
 iab resutl result
 iab retunr return
+iab reutrn return
 iab souble double
 iab stirng string
 iab tempate template
 iab templaet template
 iab tyoename typename
-iab usgin using
 iab unsined unsigned
+iab usgin using
+iab vlaue value
 iab widht width
 iab xonst const

@@ -19,10 +19,10 @@ def collapse(path, lenght_limit):
 if len(sys.argv) < 2:
     sys.exit(0)
 
-path = sys.argv[1]
+path = ' '.join(sys.argv[1:-1])
 
 if len(sys.argv) >= 3:
-    length_limit = int(sys.argv[2])
+    length_limit = int(sys.argv[-1])
 
 if len(path) >= length_limit:
     path = collapse(path, length_limit)
