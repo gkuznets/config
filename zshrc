@@ -128,6 +128,7 @@ else
     alias p="python3"
 fi
 alias v="vim"
+(xexists "vagrant") && alias vg="vagrant"
 
 if xexists "gls"; then
     alias ls="gls --color=always -F"
