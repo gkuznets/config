@@ -69,7 +69,7 @@ zle -N zle-keymap-select
 if [ $UID -eq 0 ]; then USER_COLOR="red"; else USER_COLOR="white"; fi
 local return_code="%(?..%{$fg[red]%}%? %{$reset_color%})"
 collapse_path() {
-    $RC_ROOT/collapse-path.py $(pwd | sed -e "s,^$HOME,~,") 25
+    $RC_ROOT/collapse-path.py $(pwd | sed -e "s,^$HOME,~,") 35
 }
 
 if [ $PLATFORM = "linux" ]; then
