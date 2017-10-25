@@ -139,3 +139,5 @@ fi
 
 # OPAM configuration
 . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+[ -f $HOME/.config/local_zshrc ] && . $HOME/.config/local_zshrc
