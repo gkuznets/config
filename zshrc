@@ -115,10 +115,12 @@ alias c="clear"
 alias e="vim"
 alias :e="vim"
 alias f="find . -name"
-alias g="git"
+alias g="git --no-pager"
 alias gti="git"
+alias hd="head -n"
 alias m="clear && make -j $(system_concurrency)"
 alias md="mkdir"
+alias n="ninja -j $(system_concurrency)"
 alias o="open"
 if xexists "ptpython"; then
     alias p="ptpython"
@@ -127,8 +129,9 @@ elif xexists "ipython3"; then
 else
     alias p="python3"
 fi
-alias v="vim"
+alias v="view"
 (xexists "vagrant") && alias vg="vagrant"
+alias wg="wget"
 
 if xexists "gls"; then
     alias ls="gls --color=always -F"
