@@ -14,6 +14,12 @@ cpp_compiler() {
     esac
 }
 
+compile_cpp_and_run() {
+    local executable=`mktemp -t compile_cpp_and_run.XXXXXX`
+    trap 'rm -rf $executable'
+    $(cpp_compiler) $@ -o $executable && $executable
+}
+
 # check if command exists
 xexists() {
     test -x "`command -v $1`"
@@ -108,6 +114,7 @@ export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 # Aliases
 alias -- ++="$(cpp_compiler)"
+alias -- +++=compile_cpp_and_run
 alias -g ...="../.."
 alias c="clear"
 (xexists "cargo") && alias cg="cargo"
@@ -129,6 +136,7 @@ elif xexists "ipython3"; then
 else
     alias p="python3"
 fi
+alias p3="python3"
 alias v="view"
 (xexists "vagrant") && alias vg="vagrant"
 alias wg="wget"
@@ -144,3 +152,7 @@ fi
 . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 [ -f $HOME/.config/local_zshrc ] && . $HOME/.config/local_zshrc
+
+unset cpp_compiler
+unset compile_cpp_and_run
+unset xexists
