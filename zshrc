@@ -8,8 +8,8 @@ local RC_ROOT=$HOME/.config/rc
 
 cpp_compiler() {
     case $PLATFORM in
-        ("macosx") print "clang++ --std=c++1z -Wall -march=native" ;;
-        ("linux") print "g++ --std=c++1z -Wall -march=native" ;;
+        ("macosx") print "clang++ --std=c++2a -Wall -march=native" ;;
+        ("linux") print "g++ --std=c++2a -Wall -march=native" ;;
         (*) print "c++" ;;
     esac
 }
@@ -22,7 +22,7 @@ compile_cpp_and_run() {
 
 # check if command exists
 xexists() {
-    test -x "`command -v $1`"
+    [ "`command -v $1`" ]
     return $?
 }
 
@@ -137,6 +137,7 @@ else
     alias p="python3"
 fi
 alias p3="python3"
+(xexists "ts-node") && alias t="ts-node"
 alias v="view"
 (xexists "vagrant") && alias vg="vagrant"
 alias wg="wget"
@@ -144,9 +145,9 @@ alias wg="wget"
 if xexists "gls"; then
     alias ls="gls --color=always -F"
 fi
-if xexists "grm"; then
-    alias rm="grm"
-fi
+#if xexists "grm"; then
+#    alias rm="grm"
+#fi
 
 # OPAM configuration
 . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

@@ -18,6 +18,7 @@ tips = [
     "Use <space>x to toggle [ ] checkbox in org mode",
     "Use <Leader>\" to enquote a word",
     "Use <Leader>C to switch b/w snake_case/lowerCamelCase/UpperCamelCase",
+    "Use '-O' switch to open multiple files from command line",
 ]
 
 sys.stdout.write(random.choice(tips))

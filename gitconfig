@@ -28,6 +28,7 @@
     hhhh = !git --no-pager log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short -4
     hist = !git --no-pager log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     m = checkout master
+    p = checkout -
     rh = reset --hard
     ri = rebase -i
     st = status
